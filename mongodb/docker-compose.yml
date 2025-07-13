@@ -1,0 +1,25 @@
+
+# Definição dos serviços
+services:
+  # Serviço do banco de dados MongoDB
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: adminUser
+      MONGO_INITDB_ROOT_PASSWORD: adminPassword
+      MONGO_DATABASE: app_db
+    restart: always
+    networks:
+      - mongo-network
+
+volumes:
+  mongo_data:
+
+networks:
+  mongo-network:
+    driver: bridge
+    

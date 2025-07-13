@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <div class="min-h-screen flex flex-col">
     <header class="bg-blue-600 text-white p-4 shadow-md">
       <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-2xl font-bold rounded-md">Meu App Completo</h1>
+        <h1 class="text-2xl font-bold rounded-md">Meu App</h1>
         <nav>
           <ul class="flex space-x-4">
             <li>

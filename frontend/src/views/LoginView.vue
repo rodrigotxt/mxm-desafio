@@ -1,3 +1,4 @@
+// src/views/LoginView.vue
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -8,7 +9,7 @@ const router = useRouter()
 
 const email = ref('input_email')
 const password = ref('input_password')
-const errorMessage = ref('error_message')
+const errorMessage = ref('')
 
 // Função para lidar com o envio do formulário de login
 const handleLogin = async () => {
@@ -60,6 +61,9 @@ const handleLogin = async () => {
           >
             Entrar
           </button>
+        </div>
+        <div class="text-center">
+          <p class="text-blue-600 mt-5">test@example.com / password123</p>
         </div>
       </form>
     </div>

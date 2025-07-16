@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db';
 import { corsMiddleware } from './middleware/cors';
 import authRoutes from './routes/auth';
-import GeminiRoutes from './routes/gemini';sjcreiiiiiiiii00
+import GeminiRoutes from './routes/gemini';
 
 dotenv.config();
 

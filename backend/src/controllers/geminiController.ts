@@ -1,3 +1,4 @@
+// src/controllers/geminiController.ts
 import { Request, Response } from 'express';
 import dotenv from 'dotenv';
 
@@ -8,21 +9,67 @@ const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/
 
 /**
  * Lida com a requisição para gerar conteúdo usando a API do Gemini.
- * @param req Requisição Express, esperando { prompt: string } no corpo.
+ * @param req Requisição Express, esperando { ingredients: string, temperament: string, mode: string } no corpo.
  * @param res Resposta Express.
  */
 export const generateContent = async (req: Request, res: Response) => {
-  const { prompt } = req.body;
+  console.log('Gerando conteúdo com a API do Gemini...');
+  const { ingredients, temperament, mode } = req.body;
 
-  // Validação básica do prompt
-  if (!prompt) {
-    return res.status(400).json({ message: 'O prompt é obrigatório.' });
+  // Validação básica dos inputs
+  if (!ingredients) {
+    return res.status(400).json({ message: 'Os ingredientes são obrigatórios.' });
   }
 
   // Verifica se a chave da API está configurada
   if (!GEMINI_API_KEY) {
     console.error('Erro: GEMINI_API_KEY não definida no arquivo .env');
     return res.status(500).json({ message: 'Chave da API do Gemini não configurada no servidor.' });
+  }
+
+  // Constrói o prompt dinâmico para a API do Gemini
+  let fullPrompt = `Respoda como um 'gênio da cozinha'. Sugira uma receita simples de forma objetiva com esses ingredientes: ${ingredients}.`;
+
+const caracteristicas = {
+  ironico: [
+    "de forma irônica e divertida",
+    "com sarcasmo como quem oferece carinho... envenenado.",
+    "sempre com uma resposta afiada e com um sorriso no rosto.",
+    "no limite entre a piada e o deboche.",
+    "de forma a não perder a chance de soltar uma indireta elegante.",
+    "de forma 'só tô brincando' depois de uma verdade dolorosa."
+  ],
+  nervoso: [
+    "de forma um pouco impaciente, irônica e direta.",
+    "de forma ríspida, impaciente e direta.",
+    "mal criado e sem paciência até com o vento.",
+    "de forma que explode fácil, tipo milho de pipoca em óleo quente.",
+    "atravessado até quando tá certo.",
+    "como uma bomba relógio em modo soneca.",
+    "de forma que não tolera erro — nem seu, nem dos outros."
+  ]
+};
+
+function sortearHumor(categoria: 'ironico' | 'nervoso') {
+  const lista = caracteristicas[categoria];
+  return lista[Math.floor(Math.random() * lista.length)];
+}
+
+  switch (temperament) {
+    case 'Irônico':
+      fullPrompt += ` Responda ${sortearHumor('ironico')}`;
+      break;
+    case 'Nervoso':
+      fullPrompt += ` Responda ` + sortearHumor('nervoso');
+      break;
+    case 'Normal':
+    default:
+      // Não adiciona nada para temperamento normal
+      break;
+  }
+
+  if (mode === 'Restritivo') {
+    fullPrompt += ` Use SOMENTE os ingredientes citados. Não adicione nenhum outro ingrediente.`;
   }
 
   try {
@@ -32,7 +79,7 @@ export const generateContent = async (req: Request, res: Response) => {
         {
           parts: [
             {
-              text: prompt
+              text: fullPrompt // Usa o prompt construído dinamicamente
             }
           ]
         }
@@ -76,4 +123,3 @@ export const generateContent = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Erro interno do servidor.', error: error.message });
   }
 };
-

@@ -71,7 +71,7 @@ const sendOrder = async () => {
   console.log('Enviando pedido ao backend:', JSON.stringify(requestBody));
 
   try {
-    const response = await fetch('http://localhost:3000/api/ia/generate', {
+    const response = await fetch(import.meta.env.VITE_API_URL + "/ia/generate", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

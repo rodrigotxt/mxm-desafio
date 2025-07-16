@@ -145,7 +145,7 @@ const sendOrder = async () => {
             id="ingredients"
             v-model="ingredientsInput"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 h-24 resize-none"
-            placeholder="Faça seu pedido, insira os ingredientes que você têm e veja a magia acontecer!..."
+            placeholder="Insira os ingredientes e veja a magia acontecer!... ex: batata, arroz, feijão"
           ></textarea>
         </div>
 

@@ -7,8 +7,8 @@ import { useAuthStore } from '@/stores/auth'
 const authStore = useAuthStore()
 const router = useRouter()
 
-const email = ref('input_email')
-const password = ref('input_password')
+const email = ref('test@example.com')
+const password = ref('password123')
 const errorMessage = ref('')
 
 // Função para lidar com o envio do formulário de login
@@ -18,7 +18,7 @@ const handleLogin = async () => {
     // Chama a ação de login do store Pinia
     await authStore.login(email.value, password.value)
     // Se o login for bem-sucedido, redireciona para o dashboard
-    router.push('/dashboard')
+    router.push('/chat')
   } catch (error: any) {
     // Se houver um erro, exibe a mensagem de erro
     errorMessage.value = error.message || 'Erro ao fazer login.'

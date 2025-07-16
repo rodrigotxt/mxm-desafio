@@ -37,8 +37,8 @@
 **O projeto é organizado num monorepo com duas pastas principais:**
 
 ```
-my-fullstack-app/
-├── my-fullstack-app-frontend/  # Código do frontend (Vue 3)
+mmx-desafio/
+├── frontend/  # Código do frontend (Vue 3)
 │   ├── public/
 │   ├── src/
 │   │   ├── assets/             # CSS global (Tailwind)
@@ -50,7 +50,7 @@ my-fullstack-app/
 │   ├── package.json
 │   ├── postcss.config.js
 │   └── tailwind.config.js
-├── my-fullstack-app-backend/   # Código do backend (Node.js/Express)
+├── backend/   # Código do backend (Node.js/Express)
 │   ├── src/
 │   │   ├── config/             # Configuração do DB
 │   │   ├── controllers/        # Lógica de negócio (autenticação, Gemini)
@@ -61,7 +61,8 @@ my-fullstack-app/
 │   ├── dist/                   # Código JavaScript compilado (gerado pelo tsc)
 │   ├── package.json
 │   └── tsconfig.json
-├── docker-compose.yml          # Docker Compose para subir a aplicação completa
+├── mongodb/   # Docker para subir o banco
+│   ├── docker-compose.yml # Docker Compose para o mongodb
 └── README.md                   # Este ficheiro
 
 ```
@@ -79,7 +80,7 @@ my-fullstack-app/
 
 ### Variáveis de Ambiente (`<span class="selected">.env</span>`)
 
-**Na raiz da pasta **`<span class="selected">my-fullstack-app-backend/</span>`, crie um ficheiro chamado `<span class="selected">.env</span>` (sem extensão). Este ficheiro conterá as variáveis de ambiente sensíveis.
+**Na raiz da pasta **`<span class="selected">backend/</span>`, crie um ficheiro chamado `<span class="selected">.env</span>` (sem extensão). Este ficheiro conterá as variáveis de ambiente sensíveis.
 
 ```
 PORT=3000
@@ -105,7 +106,7 @@ GEMINI_API_KEY=SUA_CHAVE_API_GEMINI_AQUI # Obtenha a sua chave da Google AI Stud
 1. **Navegue até a pasta do backend:**
 
    ```
-   cd my-fullstack-app-backend
+   cd backend
 
    ```
 2. **Instale as dependências:**
@@ -140,7 +141,7 @@ GEMINI_API_KEY=SUA_CHAVE_API_GEMINI_AQUI # Obtenha a sua chave da Google AI Stud
 1. **Navegue até a pasta do frontend:**
 
    ```
-   cd my-fullstack-app-frontend
+   cd frontend
 
    ```
 2. **Instale as dependências:**

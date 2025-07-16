@@ -7,6 +7,7 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     isAuthenticated: false,
     userId: null as string | null, // Armazena o ID do usuário, null se não autenticado
+    token: null as string | null,
   }),
 
   getters: {
@@ -23,6 +24,7 @@ export const useAuthStore = defineStore('auth', {
       if (email === 'test@example.com' && password === 'password123') {
         this.isAuthenticated = true
         this.userId = 'user-123'
+        this.token = 'token-123'
         console.log('Login bem-sucedido!')
       } else {
         throw new Error('Email ou senha inválidos.')
